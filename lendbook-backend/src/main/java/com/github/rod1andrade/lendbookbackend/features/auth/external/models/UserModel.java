@@ -39,6 +39,7 @@ public class UserModel implements Serializable {
     @Getter
     @Setter
     @NonNull
+    @Column(unique = true)
     private String email;
 
     @Getter
