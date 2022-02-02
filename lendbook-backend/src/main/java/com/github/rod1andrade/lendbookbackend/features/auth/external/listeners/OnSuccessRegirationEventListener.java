@@ -1,6 +1,7 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.listeners;
 
 import com.github.rod1andrade.lendbookbackend.features.auth.core.entities.User;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.ports.UserOutputData;
 import com.github.rod1andrade.lendbookbackend.features.auth.external.event.OnSuccessRegistrationEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
@@ -16,14 +17,14 @@ public class OnSuccessRegirationEventListener implements ApplicationListener<OnS
 
     @Override
     public void onApplicationEvent(OnSuccessRegistrationEvent event) {
-        User user = event.getUser();
+        UserOutputData user = (UserOutputData) event.getOutputData();
         var simpleMailMessage = new SimpleMailMessage();
 
         String msg = "To confirm your account, please click in link below: " + event.getAppUrl() + "/auth" +
                 "/confirmAccount" +
-                "?token=" + user.getStatus().getToken();
+                "?token=" + user.getToken();
 
-        simpleMailMessage.setTo(user.getEmail().getValue());
+        simpleMailMessage.setTo(user.getEmail());
         simpleMailMessage.setSubject("LeendBooks: Account email confirmation.");
         simpleMailMessage.setText(msg);
 

@@ -12,6 +12,7 @@ import java.time.Instant;
 @Entity(name = "tb_user_status")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @ToString
 public class StatusModel  implements Serializable {
 
@@ -25,6 +26,7 @@ public class StatusModel  implements Serializable {
 
     @Getter
     @Setter
+    @Builder.Default
     private UserModelStatus status = UserModelStatus.UNACTIVATE;
 
     @Getter
@@ -33,10 +35,12 @@ public class StatusModel  implements Serializable {
 
     @Getter
     @Setter
+    @Builder.Default
     private Instant createAt = Instant.now();
 
     @Getter
     @Setter
+    @Builder.Default
     private Instant expiryTime = Instant.now().plusSeconds(TOKEN_LIMIT_TIME_IN_SECONDS);
 
     @OneToOne(mappedBy = "statusModel")

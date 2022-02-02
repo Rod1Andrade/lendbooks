@@ -16,6 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Builder
 @ToString
 public class UserModel implements Serializable {
 

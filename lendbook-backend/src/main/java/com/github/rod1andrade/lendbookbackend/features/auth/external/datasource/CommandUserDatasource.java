@@ -1,7 +1,7 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.datasource;
 
 import com.github.rod1andrade.lendbookbackend.features.auth.core.entities.User;
-import com.github.rod1andrade.lendbookbackend.features.auth.external.dtos.UserModelDTO;
+import com.github.rod1andrade.lendbookbackend.features.auth.external.models.StatusModel;
 import com.github.rod1andrade.lendbookbackend.features.auth.external.models.UserModel;
 import com.github.rod1andrade.lendbookbackend.features.auth.external.repositories.UserModelRepository;
 import com.github.rod1andrade.lendbookbackend.features.auth.infra.datasource.ICommandUserDatasource;
@@ -21,7 +21,16 @@ public class CommandUserDatasource implements ICommandUserDatasource {
 
     @Override
     public void save(User user) throws CommandUserDatasourceException {
-        Optional<UserModel> userModelOptional = Optional.of(userModelRepository.save(UserModelDTO.castUserToUserModel(user)));
+
+        Optional<UserModel> userModelOptional = Optional.of(userModelRepository.save(
+                UserModel.builder()
+                        .name(user.getFullName().getFirstName())
+                        .lastName(user.getFullName().getLastName())
+                        .email(user.getEmail().getValue())
+                        .password(user.getPassword().getValue())
+                        .statusModel(StatusModel.builder().token(user.getStatus().getToken()).build())
+                        .build()
+        ));
 
         log.info("User token? {}",user.getStatus().getToken());
 
