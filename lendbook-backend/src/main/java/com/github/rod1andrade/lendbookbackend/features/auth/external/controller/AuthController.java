@@ -1,5 +1,6 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.controller;
 
+import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.IRegisterUserUsecaseFactory;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.ports.UserInputData;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IRegisterUserUsecase;
 import com.github.rod1andrade.lendbookbackend.features.auth.external.event.OnSuccessRegistrationEvent;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final PasswordEncoder passwordEncoder;
-    private final RegisterUserUsecaseFactory registerUserUsecaseFactory;
+    private final IRegisterUserUsecaseFactory registerUserUsecaseFactory;
     private final ApplicationEventPublisher applicationEventPublisher;
     private final Environment env;
 
