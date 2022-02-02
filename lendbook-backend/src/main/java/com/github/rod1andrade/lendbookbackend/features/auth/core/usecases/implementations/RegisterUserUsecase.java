@@ -35,6 +35,9 @@ public class RegisterUserUsecase implements IRegisterUserUsecase {
 
     @Override
     public AbstractUserOutputData getOutputDate() {
-        return new UserOutputData().parserTo(userInputData.parserToEntity(null));
+        return new UserOutputData()
+                .parserTo(
+                        userInputData.parserToEntity(null)
+                );
     }
 }

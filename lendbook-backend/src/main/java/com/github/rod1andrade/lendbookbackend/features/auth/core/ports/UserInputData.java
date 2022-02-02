@@ -9,6 +9,7 @@ import com.github.rod1andrade.lendbookbackend.features.auth.core.valueobjects.Pa
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.util.Random;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -27,10 +28,9 @@ public class UserInputData extends AbstractUserInputData {
             password.encode(encodeFunction);
 
         var email = new Email(getEmail());
-        var status = new Status(
-                getToken() == null ? UUID.randomUUID().toString() : getToken(),
-                UserStatus.UNACTIVATE
-        );
+
+        if(getToken() == null) setToken(UUID.randomUUID().toString());
+        var status = new Status(getToken(), UserStatus.UNACTIVATE);
 
         return new User(null, fullName, email, password, status);
     }

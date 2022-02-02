@@ -28,11 +28,16 @@ public class CommandUserDatasource implements ICommandUserDatasource {
                         .lastName(user.getFullName().getLastName())
                         .email(user.getEmail().getValue())
                         .password(user.getPassword().getValue())
-                        .statusModel(StatusModel.builder().token(user.getStatus().getToken()).build())
+                        .statusModel(
+                                StatusModel.builder()
+                                        .createAt(user.getStatus().getCreateAt())
+                                        .expiryTime(user.getStatus().getExpiryTime())
+                                        .token(user.getStatus().getToken())
+                                        .build())
                         .build()
         ));
 
-        log.info("User token? {}",user.getStatus().getToken());
+        log.info("User token? {}", user.getStatus().getToken());
 
         userModelOptional.ifPresentOrElse(
                 value -> log.info("User has been added: {}", value),

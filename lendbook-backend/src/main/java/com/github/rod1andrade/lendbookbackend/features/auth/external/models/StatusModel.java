@@ -1,8 +1,6 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.rod1andrade.lendbookbackend.features.auth.external.enums.UserModelStatus;
-import com.sun.source.doctree.InlineTagTree;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,8 +13,6 @@ import java.time.Instant;
 @Builder
 @ToString
 public class StatusModel  implements Serializable {
-
-    private static final long TOKEN_LIMIT_TIME_IN_SECONDS = 1000;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,13 +31,11 @@ public class StatusModel  implements Serializable {
 
     @Getter
     @Setter
-    @Builder.Default
-    private Instant createAt = Instant.now();
+    private Instant createAt;
 
     @Getter
     @Setter
-    @Builder.Default
-    private Instant expiryTime = Instant.now().plusSeconds(TOKEN_LIMIT_TIME_IN_SECONDS);
+    private Instant expiryTime;
 
     @OneToOne(mappedBy = "statusModel")
     @Getter

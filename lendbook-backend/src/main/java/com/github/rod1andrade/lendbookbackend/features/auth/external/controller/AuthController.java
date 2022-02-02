@@ -1,7 +1,9 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.controller;
 
+import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.IActiveRegisterdUserByTokenFactory;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.IRegisterUserUsecaseFactory;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.ports.UserInputData;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IActiveRegisteredUserByTokenUsecase;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IRegisterUserUsecase;
 import com.github.rod1andrade.lendbookbackend.features.auth.external.event.OnSuccessRegistrationEvent;
 import com.github.rod1andrade.lendbookbackend.features.auth.external.factories.RegisterUserUsecaseFactory;
@@ -19,19 +21,23 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class AuthController {
 
-    private final PasswordEncoder passwordEncoder;
-    private final IRegisterUserUsecaseFactory registerUserUsecaseFactory;
-    private final ApplicationEventPublisher applicationEventPublisher;
     private final Environment env;
+
+    private final PasswordEncoder passwordEncoder;
+
+    private final IRegisterUserUsecaseFactory registerUserUsecaseFactory;
+    private final IActiveRegisterdUserByTokenFactory activeRegisterdUserByTokenFactory;
+
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     @PostMapping(value = "/signUp")
     public ResponseEntity<Void> registerUser(@RequestBody UserInputData userInputData) {
-        IRegisterUserUsecase userUsecase = registerUserUsecaseFactory.create();
-        userUsecase.apply(userInputData, passwordEncoder::encode);
+        IRegisterUserUsecase registerUserUsecase = registerUserUsecaseFactory.create();
+        registerUserUsecase.apply(userInputData, passwordEncoder::encode);
 
         applicationEventPublisher.publishEvent(
                 new OnSuccessRegistrationEvent(
-                        userUsecase.getOutputDate(),
+                        registerUserUsecase.getOutputDate(),
                         env.getProperty("app.host")
                 )
         );
@@ -41,7 +47,11 @@ public class AuthController {
 
     @GetMapping(value = "/confirmAccount")
     public ResponseEntity<Void> confirmAccount(@RequestParam String token) {
-        log.info("TODO: Criar rota para mudar o status para ativo do token: {}", token);
+        IActiveRegisteredUserByTokenUsecase activeRegisteredUserByTokenUsecase =
+                activeRegisterdUserByTokenFactory.create();
+
+        activeRegisteredUserByTokenUsecase.apply(token);
+
         return ResponseEntity.ok().build();
     }
 
