@@ -1,12 +1,7 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.models;
 
 
-import com.github.rod1andrade.lendbookbackend.features.auth.core.entities.User;
-import com.github.rod1andrade.lendbookbackend.features.auth.core.valueobjects.Email;
-import com.github.rod1andrade.lendbookbackend.features.auth.core.valueobjects.FullName;
-import com.github.rod1andrade.lendbookbackend.features.auth.core.valueobjects.Password;
 import lombok.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.io.Serializable;
