@@ -37,3 +37,7 @@ Pendências
 - [ ] Interação com a API
 
 ![image](https://user-images.githubusercontent.com/51142291/152538091-809fd703-7e18-4ee4-a5d3-b77fd412fd35.png)
+
+# License
+
+MIT
