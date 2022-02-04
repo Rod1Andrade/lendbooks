@@ -17,6 +17,52 @@
         </div>
       </section>
     </aside>
-    <main role="main" id="main-panel"></main>
+    <main role="main" id="main-panel">
+      <div id="main-panel-header">
+        <img src="assets/svg/undraw_voice_interface_re_mhnw.svg" [width]="302">
+      </div>
+      <div id="main-panel-title">
+        <h1>Detalhes da conta</h1>
+      </div>
+      <div id="main-panel-body">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="Digite seu primeiro nome">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Sobrenome</mat-label>
+            <input matInput placeholder="Digite seu sobrenome">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" placeholder="seu@email.com">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Senha</mat-label>
+            <input matInput type="password" placeholder="********">
+            <button mat-icon-button matSuffix [attr.aria-label]="'Hide password'" [attr.arial-pressed]="'hide'">
+              <mat-icon>{{'visibility_off'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Confirmar Senha</mat-label>
+            <input matInput type="password" placeholder="********">
+            <button mat-icon-button matSuffix [attr.aria-label]="'Hide password'" [attr.arial-pressed]="'hide'">
+              <mat-icon>{{'visibility_off'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </p>
+        <button mat-raised-button color="primary">Finalizar</button>
+      </div>
+    </main>
   </section>
 </div>

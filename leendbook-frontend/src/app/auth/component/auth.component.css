@@ -11,8 +11,6 @@
 
 #auth-section {
   width: 1280px;
-  height: 680px;
-  box-shadow: 0px 0px 4px 0 rgb(0, 0, 0, 0.25);
 }
 
 #auth-section {
@@ -23,6 +21,7 @@
 #left-panel {
   background-color: #46EFA8;
   height: 100%;
+  box-shadow: 0px 0px 4px 0 rgb(0, 0, 0, 0.25);
 }
 
 #left-panel-content{
@@ -36,7 +35,7 @@
 }
 
 #left-panel-content-title {
-  padding: 1.5em;
+  padding: 2.5em;
   color: white;
 }
 
@@ -45,7 +44,7 @@
 }
 
 #left-panel-content-infotext {
-  padding: 1.5em;
+  padding: 4.5em;
   color: white;
 }
 
@@ -60,10 +59,38 @@
 }
 
 #left-panel-content-footer img {
-  margin-bottom: -3px;
+  margin-bottom: -6px;
   padding: 0;
 }
 
 #main-panel {
   height: 100%;
+  box-shadow: 0px 0px 4px 0 rgb(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#main-panel-header {
+  padding-top: 1.2em;
+}
+
+#main-panel-body {
+  width: 450px;
+  height: 412px;
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
+}
+
+#main-panel-body mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding: 0;
 }
