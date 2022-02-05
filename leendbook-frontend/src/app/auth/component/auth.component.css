@@ -90,3 +90,28 @@
 #main-panel-body mat-form-field {
   width: 100%;
 }
+
+/** 1200px **/
+@media screen and (max-width: 1200px) {
+  #auth-section {
+    width: 1000px;
+  }
+}
+
+/** 1000px **/
+@media screen and (max-width: 1000px) {
+  #auth-section {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  #left-panel  {
+    display: none;
+  }
+
+  #main-panel {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
