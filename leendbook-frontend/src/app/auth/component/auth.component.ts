@@ -12,6 +12,7 @@ import {
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
+  isLoading = false;
   _errors: UserFormError = {};
 
   hideableFields: any = {
@@ -124,7 +125,7 @@ export class AuthComponent implements OnInit {
   /**
    * When finish the process to create a user.
    */
-  onSubmit(): void {
+   async onSubmit()  {
     const formValues = this.userForm.value;
     const user: User = new User(
       formValues.firstName,
@@ -136,6 +137,10 @@ export class AuthComponent implements OnInit {
     // todo: mandar para o servico de registro de usuario.
     // todo: desabilitar o botao de envio.
     // todo: adicionar indicador de carregamento.
+    this.isLoading = true;
+    await setTimeout(() => {
+      this.isLoading = false;
+    } , 2000);
     console.log(user);
   }
 }

@@ -1,7 +1,7 @@
 <div id="auth-container">
-    <div id="header-title">
-      <h2>Lend<span>Books</span></h2>
-    </div>
+  <div id="header-title">
+    <h2>Lend<span>Books</span></h2>
+  </div>
   <section id="auth-section">
     <aside id="left-panel">
       <section id="left-panel-content">
@@ -121,9 +121,14 @@
             mat-raised-button
             color="primary"
             type="submit"
-            [disabled]="userForm.invalid"
+            [disabled]="userForm.invalid || isLoading"
           >
-            Finalizar
+            {{ isLoading ? "" : "Finalizar" }}
+            <mat-spinner
+              *ngIf="isLoading"
+              [diameter]="30"
+              color="accent"
+            ></mat-spinner>
           </button>
         </form>
       </div>

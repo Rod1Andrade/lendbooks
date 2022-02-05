@@ -104,6 +104,12 @@
   width: 100%;
 }
 
+#main-panel-body form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /** 1200px **/
 @media screen and (max-width: 1200px) {
   #auth-section {
