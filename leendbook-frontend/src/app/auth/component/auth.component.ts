@@ -1,44 +1,142 @@
+import { UserFormError } from './../models/user-form-error';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
-import { AuthService } from '../services/auth.service';
-
+import {
+  FormBuilder,
+  FormControl,
+  FormControlName,
+  Validators,
+} from '@angular/forms';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
-  _user: User = new User();
+  _errors: UserFormError = {};
 
-  constructor(private authService: AuthService) {}
+  hideableFields: any = {
+    password: true,
+    confirmPassword: true,
+  };
+
+  userForm = this.formBuilder.group({
+    firstName: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(40),
+    ]),
+    lastName: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(40),
+    ]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(70),
+    ]),
+  });
+
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.authService.sayHello();
-
-    this._user.setFirstName('Rodrigo');
+    console.log(this.userForm);
   }
 
-  getUser(): User {
-    return this._user;
+  /**
+   * Error object to any form field.
+   *
+   * @returns any
+   */
+  getError(): any {
+    this._errors = {
+      firstName: this._getFirstNameErrorMessage(),
+      lastName: this._getLastNameErrorMessage(),
+      email: this._getEmailErrorMessage(),
+      password: this._getPasswordErrorMessage(),
+      confirmPassword: '',
+    };
+
+    return this._errors;
   }
 
-  onChangeFirstName(event: any): void {
-    this.getUser().setFirstName(event.target.value);
+  _getFirstNameErrorMessage(): String {
+    if (this.userForm.get('firstName')?.hasError('required')) {
+      return 'Por favor insira seu nome.';
+    }
+
+    if (this.userForm.get('firstName')?.hasError('minlength')) {
+      return 'O nome deve ter no mínimo 3 letras.';
+    }
+
+    if (this.userForm.get('firstName')?.hasError('maxlength')) {
+      return 'O nome deve ser menor que 40.';
+    }
+
+    return '';
   }
 
-  onChangeLastName(event: any): void {
-    this.getUser().setLastName(event.target.value);
+  _getLastNameErrorMessage(): String {
+    if (this.userForm.get('lastName')?.hasError('required')) {
+      return 'Por favor insira seu sobrenome.';
+    }
+
+    if (this.userForm.get('lastName')?.hasError('minlength')) {
+      return 'O nome deve ter no mínimo 4 letras.';
+    }
+
+    if (this.userForm.get('lastName')?.hasError('maxlength')) {
+      return 'O nome deve ser menor que 40.';
+    }
+
+    return '';
   }
 
-  onChangeEmail(event: any): void {
-    this.getUser().setEmail(event.target.value);
+  _getEmailErrorMessage(): String {
+    if (this.userForm.get('email')?.hasError('required')) {
+      return 'Por favor insira seu email.';
+    }
+
+    if (this.userForm.get('email')?.hasError('email')) {
+      return 'Por entre com um email válido.';
+    }
+
+    return '';
   }
 
-  onChangePassword(event: any): void {
-    this.getUser().setPassword(event.target.value);
+  _getPasswordErrorMessage(): String {
+    if (this.userForm.get('password')?.hasError('required')) {
+      return 'Por favor insira sua senha.';
+    }
+
+    if (this.userForm.get('password')?.hasError('minlength')) {
+      return 'A senha deve ter no minímo 8 carateres.';
+    }
+
+    if (this.userForm.get('password')?.hasError('maxlength')) {
+      return 'A senha deve ter no máximo 70 carateres.';
+    }
+
+    return '';
   }
 
-  onClickFinish(event: any): void {
-    console.log(this.getUser());
+  /**
+   * When finish the process to create a user.
+   */
+  onSubmit(): void {
+    const formValues = this.userForm.value;
+    const user: User = new User(
+      formValues.firstName,
+      formValues.lastName,
+      formValues.email,
+      formValues.password
+    );
+
+    // todo: mandar para o servico de registro de usuario.
+    // todo: desabilitar o botao de envio.
+    // todo: adicionar indicador de carregamento.
+    console.log(user);
   }
 }

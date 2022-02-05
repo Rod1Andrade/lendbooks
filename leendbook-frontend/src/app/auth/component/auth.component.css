@@ -76,7 +76,7 @@
   padding-top: 1.2em;
 }
 
-#main-panel-body {
+#main-panel-body form{
   width: 450px;
   height: 412px;
   padding-top: 2.5em;
@@ -89,8 +89,4 @@
 
 #main-panel-body mat-form-field {
   width: 100%;
-}
-
-::ng-deep .mat-form-field-wrapper {
-  padding: 0;
 }

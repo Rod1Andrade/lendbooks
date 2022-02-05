@@ -1,8 +1,10 @@
 export class User {
-  _firstName?: String;
-  _lastName?: String;
-  _email?: String;
-  _password?: String;
+  constructor(
+    private _firstName?: String,
+    private _lastName?: String,
+    private _email?: String,
+    private _password?: String
+  ) {}
 
   setFirstName(firstName: String): void {
     this._firstName = firstName;
