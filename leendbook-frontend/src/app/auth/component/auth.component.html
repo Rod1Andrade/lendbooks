@@ -13,13 +13,16 @@
           </h3>
         </div>
         <div id="left-panel-content-footer">
-          <img src="assets/svg/footer-logo.svg">
+          <img src="assets/svg/footer-logo.svg" />
         </div>
       </section>
     </aside>
     <main role="main" id="main-panel">
       <div id="main-panel-header">
-        <img src="assets/svg/undraw_voice_interface_re_mhnw.svg" [width]="302">
+        <img
+          src="assets/svg/undraw_voice_interface_re_mhnw.svg"
+          [width]="302"
+        />
       </div>
       <div id="main-panel-title">
         <h1>Detalhes da conta</h1>
@@ -28,40 +31,78 @@
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Nome</mat-label>
-            <input matInput placeholder="Digite seu primeiro nome">
+            <input
+              matInput
+              placeholder="Digite seu primeiro nome"
+              value="{{ getUser().getFirstName() }}"
+              (change)="onChangeFirstName($event)"
+            />
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Sobrenome</mat-label>
-            <input matInput placeholder="Digite seu sobrenome">
+            <input
+              matInput
+              placeholder="Digite seu sobrenome"
+              value="{{ getUser().getLastName() }}"
+              (change)="onChangeLastName($event)"
+            />
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput type="email" placeholder="seu@email.com">
+            <input
+              matInput
+              type="email"
+              placeholder="seu@email.com"
+              value="{{ getUser().getEmail() }}"
+              (change)="onChangeEmail($event)"
+            />
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Senha</mat-label>
-            <input matInput type="password" placeholder="********">
-            <button mat-icon-button matSuffix [attr.aria-label]="'Hide password'" [attr.arial-pressed]="'hide'">
-              <mat-icon>{{'visibility_off'}}</mat-icon>
+            <input
+              matInput
+              type="password"
+              placeholder="********"
+              value="{{ getUser().getPassword() }}"
+              (change)="onChangePassword($event)"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              [attr.aria-label]="'Hide password'"
+              [attr.arial-pressed]="'hide'"
+            >
+              <mat-icon>{{ "visibility_off" }}</mat-icon>
             </button>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Confirmar Senha</mat-label>
-            <input matInput type="password" placeholder="********">
-            <button mat-icon-button matSuffix [attr.aria-label]="'Hide password'" [attr.arial-pressed]="'hide'">
-              <mat-icon>{{'visibility_off'}}</mat-icon>
+            <input matInput type="password" placeholder="********" />
+            <button
+              mat-icon-button
+              matSuffix
+              [attr.aria-label]="'Hide password'"
+              [attr.arial-pressed]="'hide'"
+            >
+              <mat-icon>{{ "visibility_off" }}</mat-icon>
             </button>
           </mat-form-field>
         </p>
-        <button mat-raised-button color="primary">Finalizar</button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onClickFinish($event)"
+        >
+          Finalizar
+        </button>
       </div>
     </main>
   </section>
