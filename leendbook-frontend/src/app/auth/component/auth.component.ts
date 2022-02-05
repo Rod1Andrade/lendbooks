@@ -4,7 +4,6 @@ import { User } from '../models/user';
 import {
   FormBuilder,
   FormControl,
-  FormControlName,
   Validators,
 } from '@angular/forms';
 @Component({
