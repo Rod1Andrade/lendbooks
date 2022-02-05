@@ -96,26 +96,11 @@
               matInput
               [type]="hideableFields.confirmPassword ? 'password' : 'text'"
               placeholder="********"
+              formControlName="confirmPassword"
             />
             <mat-error *ngIf="userForm.invalid">{{
               getError().confirmPassword
             }}</mat-error>
-            <button
-              type="button"
-              mat-icon-button
-              matSuffix
-              [attr.aria-label]="'Hide Confirm password'"
-              [attr.arial-pressed]="'hide'"
-              (click)="
-                hideableFields.confirmPassword = !hideableFields.confirmPassword
-              "
-            >
-              <mat-icon>{{
-                hideableFields.confirmPassword
-                  ? "visibility_off"
-                  : "visibility_on"
-              }}</mat-icon>
-            </button>
           </mat-form-field>
           <button
             mat-raised-button

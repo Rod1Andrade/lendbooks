@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthComponent } from './component/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 @NgModule({
   declarations: [AuthComponent],
   providers: [],
@@ -19,6 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    RxReactiveFormsModule,
   ],
 })
 export class AuthModule {}

@@ -1,9 +1,13 @@
+import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { UserFormError } from './../models/user-form-error';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 @Component({
@@ -37,6 +41,7 @@ export class AuthComponent implements OnInit {
       Validators.minLength(8),
       Validators.maxLength(70),
     ]),
+    confirmPassword: ['', RxwebValidators.compare({fieldName: 'password'})]
   });
 
   constructor(private formBuilder: FormBuilder) {}
@@ -56,7 +61,7 @@ export class AuthComponent implements OnInit {
       lastName: this._getLastNameErrorMessage(),
       email: this._getEmailErrorMessage(),
       password: this._getPasswordErrorMessage(),
-      confirmPassword: '',
+      confirmPassword: 'As senhas devem coincidir',
     };
 
     return this._errors;
