@@ -12,6 +12,8 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+
 @NgModule({
   declarations: [AuthComponent, CheckEmailDialog],
   providers: [],
@@ -28,6 +30,7 @@ import { MatCardModule } from '@angular/material/card';
     HttpClientModule,
     MatDialogModule,
     MatCardModule,
+    MatDividerModule
   ],
   exports: []
 })
