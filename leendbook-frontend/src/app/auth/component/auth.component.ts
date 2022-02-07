@@ -1,3 +1,4 @@
+import { CheckEmailDialog } from './../utils/dialog/check-email-dialog';
 import { AuthService } from './../services/auth.service';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { UserFormError } from './../models/user-form-error';
@@ -10,6 +11,7 @@ import {
   FormGroupDirective,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -28,7 +30,8 @@ export class AuthComponent implements OnInit {
    */
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private matDialog: MatDialog
   ) {}
 
   /**
@@ -95,6 +98,10 @@ export class AuthComponent implements OnInit {
     };
 
     return this._errors;
+  }
+
+  openCheckEmailDialog(): void {
+    this.matDialog.open(CheckEmailDialog);
   }
 
   /**
@@ -200,6 +207,7 @@ export class AuthComponent implements OnInit {
         this.isLoading = false;
         this.userForm.reset();
         this.formGroupDirective.resetForm();
+        this.openCheckEmailDialog();
       },
     });
   }

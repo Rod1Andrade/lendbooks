@@ -41,7 +41,8 @@ $leendbook-frontend-theme-form: mat.define-light-theme((
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.button-theme($leendbook-frontend-theme);
 @include mat.tooltip-theme($leendbook-frontend-theme);
 @include mat.form-field-theme($leendbook-frontend-theme-form);
 @include mat.progress-spinner-theme($leendbook-frontend-theme);
+@include mat.dialog-theme($leendbook-frontend-theme-form);
+@include mat.button-theme($leendbook-frontend-theme);

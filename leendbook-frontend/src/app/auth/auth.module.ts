@@ -1,3 +1,4 @@
+import { CheckEmailDialog } from './utils/dialog/check-email-dialog';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
@@ -9,8 +10,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
-  declarations: [AuthComponent],
+  declarations: [AuthComponent, CheckEmailDialog],
   providers: [],
   imports: [
     CommonModule,
@@ -23,6 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatProgressSpinnerModule,
     RxReactiveFormsModule,
     HttpClientModule,
+    MatDialogModule,
+    MatCardModule,
   ],
+  exports: []
 })
 export class AuthModule {}
