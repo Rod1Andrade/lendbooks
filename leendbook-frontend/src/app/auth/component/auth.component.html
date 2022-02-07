@@ -30,7 +30,7 @@
         <h1>Detalhes da conta</h1>
       </div>
       <div id="main-panel-body">
-        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" #ngUserForm="ngForm">
           <mat-form-field appearance="outline">
             <mat-label>Nome</mat-label>
             <input

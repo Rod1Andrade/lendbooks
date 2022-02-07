@@ -1,32 +1,37 @@
+/**
+ * User contract expected by api.
+ *
+ * @author Rodrigo Andrade.
+ */
 export class User {
   constructor(
-    private _firstName?: String,
-    private _lastName?: String,
-    private _email?: String,
-    private _password?: String
+    private name?: String,
+    private lastName?: String,
+    private email?: String,
+    private password?: String
   ) {}
 
   setFirstName(firstName: String): void {
-    this._firstName = firstName;
+    this.name = firstName;
   }
 
   getFirstName(): String {
-    return this._firstName ?? '';
+    return this.name ?? '';
   }
 
   setLastName(lastName: String): void {
-    this._lastName = lastName;
+    this.lastName = lastName;
   }
 
   getLastName(): String {
-    return this._lastName ?? '';
+    return this.lastName ?? '';
   }
 
   setFullName(name: String): void {
     const splitedName = name.split(' ');
     if (splitedName.length < 2) throw new Error('Illegal argument');
 
-    [this._firstName, this._lastName] = splitedName;
+    [this.name, this.lastName] = splitedName;
   }
 
   getFullName(): String {
@@ -34,18 +39,18 @@ export class User {
   }
 
   setEmail(email: String): void {
-    this._email = email;
+    this.email = email;
   }
 
   getEmail(): String {
-    return this._email ?? '';
+    return this.email ?? '';
   }
 
   setPassword(password: String): void {
-    this._password = password;
+    this.password = password;
   }
 
   getPassword(): String {
-    return this._password ?? '';
+    return this.password ?? '';
   }
 }

@@ -1,13 +1,13 @@
+import { AuthService } from './../services/auth.service';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { UserFormError } from './../models/user-form-error';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../models/user';
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
-  ValidationErrors,
-  ValidatorFn,
+  FormGroup,
+  FormGroupDirective,
   Validators,
 } from '@angular/forms';
 @Component({
@@ -16,44 +16,74 @@ import {
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
+  @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
   isLoading = false;
-  _errors: UserFormError = {};
+  _errors!: UserFormError;
+  userForm!: FormGroup;
+  hideableFields!: any;
 
-  hideableFields: any = {
-    password: true,
-    confirmPassword: true,
-  };
+  /**
+   * Constructor.
+   * @param formBuilder
+   */
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService
+  ) {}
 
-  userForm = this.formBuilder.group({
-    firstName: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(40),
-    ]),
-    lastName: new FormControl('', [
-      Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(40),
-    ]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8),
-      Validators.maxLength(70),
-    ]),
-    confirmPassword: ['', RxwebValidators.compare({fieldName: 'password'})]
-  });
-
-  constructor(private formBuilder: FormBuilder) {}
-
+  /**
+   * ngOnInit()
+   */
   ngOnInit(): void {
-    console.log(this.userForm);
+    this.createUserFormGroup();
+    this.createHideableFields();
+  }
+
+  /**
+   * Cria objeto que representa o formulario do usuario.
+   */
+  createUserFormGroup(): void {
+    this.userForm = this.formBuilder.group({
+      firstName: new FormControl('Rodrigo', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(40),
+      ]),
+      lastName: new FormControl('Andrade', [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(40),
+      ]),
+      email: new FormControl('rodrigopires.profissional@gmail.com', [
+        Validators.required,
+        Validators.email,
+      ]),
+      password: new FormControl('teste1234', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(70),
+      ]),
+      confirmPassword: [
+        'teste1234',
+        RxwebValidators.compare({ fieldName: 'password' }),
+      ],
+    });
+  }
+
+  /**
+   * Cria o objeto que representa os campos 'hide'
+   */
+  createHideableFields(): void {
+    this.hideableFields = {
+      password: true,
+      confirmPassword: true,
+    };
   }
 
   /**
    * Error object to any form field.
    *
-   * @returns any
+   * @returns UserFormError
    */
   getError(): any {
     this._errors = {
@@ -67,6 +97,10 @@ export class AuthComponent implements OnInit {
     return this._errors;
   }
 
+  /**
+   * Erros possiveis para nome.
+   * @returns String
+   */
   _getFirstNameErrorMessage(): String {
     if (this.userForm.get('firstName')?.hasError('required')) {
       return 'Por favor insira seu nome.';
@@ -83,6 +117,10 @@ export class AuthComponent implements OnInit {
     return '';
   }
 
+  /**
+   * Erros possiveis para sobrenome.
+   * @returns String
+   */
   _getLastNameErrorMessage(): String {
     if (this.userForm.get('lastName')?.hasError('required')) {
       return 'Por favor insira seu sobrenome.';
@@ -99,6 +137,10 @@ export class AuthComponent implements OnInit {
     return '';
   }
 
+  /**
+   * Erros possiveis para email.
+   * @returns String
+   */
   _getEmailErrorMessage(): String {
     if (this.userForm.get('email')?.hasError('required')) {
       return 'Por favor insira seu email.';
@@ -111,6 +153,10 @@ export class AuthComponent implements OnInit {
     return '';
   }
 
+  /**
+   * Erros possiveis para senha.
+   * @returns String
+   */
   _getPasswordErrorMessage(): String {
     if (this.userForm.get('password')?.hasError('required')) {
       return 'Por favor insira sua senha.';
@@ -130,7 +176,8 @@ export class AuthComponent implements OnInit {
   /**
    * When finish the process to create a user.
    */
-   async onSubmit()  {
+  onSubmit() {
+    if (this.userForm.invalid) return;
     const formValues = this.userForm.value;
     const user: User = new User(
       formValues.firstName,
@@ -139,13 +186,21 @@ export class AuthComponent implements OnInit {
       formValues.password
     );
 
-    // todo: mandar para o servico de registro de usuario.
-    // todo: desabilitar o botao de envio.
-    // todo: adicionar indicador de carregamento.
     this.isLoading = true;
-    await setTimeout(() => {
-      this.isLoading = false;
-    } , 2000);
-    console.log(user);
+
+    this.authService.registerUser(user).subscribe({
+      next: (v) => {
+        console.log(v);
+      },
+      error: (e) => {
+        this.isLoading = false;
+        console.error(e);
+      },
+      complete: () => {
+        this.isLoading = false;
+        this.userForm.reset();
+        this.formGroupDirective.resetForm();
+      },
+    });
   }
 }

@@ -8,6 +8,7 @@ import { AuthComponent } from './component/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [AuthComponent],
   providers: [],
@@ -21,6 +22,7 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     RxReactiveFormsModule,
+    HttpClientModule,
   ],
 })
 export class AuthModule {}
