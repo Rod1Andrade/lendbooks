@@ -6,7 +6,6 @@ import com.github.rod1andrade.lendbookbackend.features.auth.core.ports.UserInput
 import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IActiveRegisteredUserByTokenUsecase;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IRegisterUserUsecase;
 import com.github.rod1andrade.lendbookbackend.features.auth.external.event.OnSuccessRegistrationEvent;
-import com.github.rod1andrade.lendbookbackend.features.auth.external.factories.RegisterUserUsecaseFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
@@ -32,6 +31,7 @@ public class AuthController {
 
     @PostMapping(value = "/signUp")
     public ResponseEntity<Void> registerUser(@RequestBody UserInputData userInputData) {
+        log.info("Sign up called");
         IRegisterUserUsecase registerUserUsecase = registerUserUsecaseFactory.create();
         registerUserUsecase.apply(userInputData, passwordEncoder::encode);
 
