@@ -14,8 +14,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$leendbook-frontend-primary: mat.define-palette($md-leendbooks);
-$leendbook-frontend-accent: mat.define-palette($md-leendbooks, A200, A100, A400);
+$leendbook-frontend-primary: mat.define-palette($md-leendbooks, 500);
+$leendbook-frontend-accent: mat.define-palette(mat.$gray-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $leendbook-frontend-warn: mat.define-palette(mat.$red-palette);
@@ -30,8 +30,21 @@ $leendbook-frontend-theme: mat.define-light-theme((
   )
 ));
 
+$leendbook-frontend-theme-default: mat.define-light-theme((
+  color: (
+    primary: mat.$indigo-palette,
+    accent: $leendbook-frontend-accent,
+    warn: $leendbook-frontend-warn,
+  )
+));
+
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.button-theme($leendbook-frontend-theme);
+@include mat.dialog-theme($leendbook-frontend-theme-default);
+@include mat.form-field-theme($leendbook-frontend-theme-default);
 
+@include mat.tooltip-theme($leendbook-frontend-theme);
+@include mat.button-theme($leendbook-frontend-theme);
+@include mat.progress-spinner-theme($leendbook-frontend-theme);
+@include mat.snack-bar-theme($leendbook-frontend-theme);

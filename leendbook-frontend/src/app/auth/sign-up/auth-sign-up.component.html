@@ -1,0 +1,121 @@
+<div id="auth-container">
+  <div id="header-title">
+    <h2>Lend<span>Books</span></h2>
+  </div>
+  <section id="auth-section">
+    <aside id="left-panel">
+      <section id="left-panel-content">
+        <div id="left-panel-content-title">
+          <h2>Lend<span>Books</span></h2>
+        </div>
+        <div id="left-panel-content-infotext">
+          <h2>Controle dos seus livros nas suas mãos.</h2>
+          <h3>
+            Com o LendBooks você define um novo jeito de emprestar livros.
+          </h3>
+        </div>
+        <div id="left-panel-content-footer">
+          <img src="assets/svg/footer-logo.svg" />
+        </div>
+      </section>
+    </aside>
+    <main role="main" id="main-panel">
+      <div id="main-panel-header">
+        <img
+          src="assets/svg/undraw_voice_interface_re_mhnw.svg"
+          [width]="302"
+        />
+      </div>
+      <div id="main-panel-title">
+        <h1>Detalhes da conta</h1>
+      </div>
+      <div id="main-panel-body">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" #ngUserForm="ngForm">
+          <mat-form-field appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input
+              matInput
+              placeholder="Digite seu primeiro nome"
+              formControlName="firstName"
+            />
+            <mat-error *ngIf="userForm.invalid">{{
+              getError().firstName
+            }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Sobrenome</mat-label>
+            <input
+              matInput
+              placeholder="Digite seu sobrenome"
+              formControlName="lastName"
+            />
+            <mat-error *ngIf="userForm.invalid">{{
+              getError().lastName
+            }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              type="email"
+              placeholder="seu@email.com"
+              formControlName="email"
+            />
+            <mat-error *ngIf="userForm.invalid">{{
+              getError().email
+            }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Senha</mat-label>
+            <input
+              matInput
+              [type]="hideableFields.password ? 'password' : 'text'"
+              placeholder="********"
+              formControlName="password"
+            />
+            <mat-error *ngIf="userForm.invalid">{{
+              getError().password
+            }}</mat-error>
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              [attr.aria-label]="'Hide password'"
+              [attr.arial-pressed]="'hide'"
+              (click)="hideableFields.password = !hideableFields.password"
+            >
+              <mat-icon>{{
+                hideableFields.password ? "visibility_off" : "visibility_on"
+              }}</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Confirmar Senha</mat-label>
+            <input
+              matInput
+              [type]="hideableFields.confirmPassword ? 'password' : 'text'"
+              placeholder="********"
+              formControlName="confirmPassword"
+            />
+            <mat-error *ngIf="userForm.invalid">{{
+              getError().confirmPassword
+            }}</mat-error>
+          </mat-form-field>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="userForm.invalid || isLoading"
+          >
+            {{ isLoading ? "" : "Finalizar" }}
+            <mat-spinner
+              *ngIf="isLoading"
+              [diameter]="30"
+              color="accent"
+            ></mat-spinner>
+          </button>
+        </form>
+      </div>
+    </main>
+  </section>
+</div>
