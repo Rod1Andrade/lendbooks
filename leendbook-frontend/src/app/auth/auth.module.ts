@@ -5,7 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthComponent } from './component/auth.component';
+import { AuthSignUpComponent } from './sign-up/auth-sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
@@ -15,7 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
-  declarations: [AuthComponent, CheckEmailDialog],
+  declarations: [AuthSignUpComponent, CheckEmailDialog],
   providers: [],
   imports: [
     CommonModule,

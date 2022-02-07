@@ -1,7 +1,7 @@
-import { CheckEmailDialog } from './../utils/dialog/check-email-dialog';
-import { AuthService } from './../services/auth.service';
+import { CheckEmailDialog } from '../utils/dialog/check-email-dialog';
+import { AuthService } from '../services/auth.service';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
-import { UserFormError } from './../models/user-form-error';
+import { UserFormError } from '../models/user-form-error';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../models/user';
 import {
@@ -15,10 +15,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css'],
+  templateUrl: './auth-sign-up.component.html',
+  styleUrls: ['./auth-sign-up.component.css'],
 })
-export class AuthComponent implements OnInit {
+export class AuthSignUpComponent implements OnInit {
   @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
   isLoading = false;
   _errors!: UserFormError;
