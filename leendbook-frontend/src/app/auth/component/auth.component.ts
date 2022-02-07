@@ -193,7 +193,6 @@ export class AuthComponent implements OnInit {
 
     this.authService.registerUser(user).subscribe({
       next: (v) => {
-        console.log(v);
       },
       error: (e) => {
         this.isLoading = false;
@@ -201,7 +200,6 @@ export class AuthComponent implements OnInit {
           this.onError('Não foi possível se conectar, tente novamente mais tarde.');
         else
           this.onError(e.error.message);
-        console.log(e);
       },
       complete: () => {
         this.isLoading = false;
