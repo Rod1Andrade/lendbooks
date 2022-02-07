@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [AuthComponent, CheckEmailDialog],
   providers: [],
@@ -30,8 +30,9 @@ import { MatDividerModule } from '@angular/material/divider';
     HttpClientModule,
     MatDialogModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSnackBarModule
   ],
-  exports: []
+  exports: [],
 })
 export class AuthModule {}

@@ -12,6 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -31,7 +32,8 @@ export class AuthComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private matDialog: MatDialog
+    private _matDialog: MatDialog,
+    private _matSnackBar: MatSnackBar
   ) {}
 
   /**
@@ -95,7 +97,7 @@ export class AuthComponent implements OnInit {
   }
 
   openCheckEmailDialog(): void {
-    this.matDialog.open(CheckEmailDialog);
+    this._matDialog.open(CheckEmailDialog);
   }
 
   /**
@@ -195,7 +197,11 @@ export class AuthComponent implements OnInit {
       },
       error: (e) => {
         this.isLoading = false;
-        console.error(e);
+        if(e.status == 0)
+          this.onError('Não foi possível se conectar, tente novamente mais tarde.');
+        else
+          this.onError(e.error.message);
+        console.log(e);
       },
       complete: () => {
         this.isLoading = false;
@@ -204,5 +210,16 @@ export class AuthComponent implements OnInit {
         this.openCheckEmailDialog();
       },
     });
+  }
+
+  /**
+   * Error message.
+   * @param msg String
+   */
+  onError(msg: string): void {
+    this._matSnackBar.open(msg, 'Fechar', {
+      horizontalPosition: 'end',
+      verticalPosition: 'top'
+    })
   }
 }
