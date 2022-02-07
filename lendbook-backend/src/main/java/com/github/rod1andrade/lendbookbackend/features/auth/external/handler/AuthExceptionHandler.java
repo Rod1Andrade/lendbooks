@@ -1,7 +1,9 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.handler;
 
 import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.ActiveRegisteredUserByTokenException;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.RegisterUserExcepion;
 import com.github.rod1andrade.lendbookbackend.features.auth.infra.exceptions.CommandStatusDatasourceException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -64,6 +66,43 @@ public class AuthExceptionHandler {
                         Instant.now(),
                         status,
                         "Persistence Error",
+                        request.getRequestURI()
+                ));
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ResponseError> constraintViolationException(
+            ConstraintViolationException e,
+            HttpServletRequest request
+    ) {
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        return ResponseEntity
+                .status(status)
+                .body(new ResponseError(
+                        "Internal Server Error",
+                        Instant.now(),
+                        status,
+                        "Constraint Violation",
+                        request.getRequestURI()
+                ));
+    }
+
+    // RegisterUserExcepion
+    @ExceptionHandler(RegisterUserExcepion.class)
+    public ResponseEntity<ResponseError> registerUserExcepion(
+            RegisterUserExcepion e,
+            HttpServletRequest request
+    ) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        return ResponseEntity
+                .status(status)
+                .body(new ResponseError(
+                        "Bad Request with user informations.",
+                        Instant.now(),
+                        status,
+                        e.getMessage(),
                         request.getRequestURI()
                 ));
     }

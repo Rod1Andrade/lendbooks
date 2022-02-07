@@ -22,7 +22,7 @@ public class CommandUserRepository implements ICommandUserRepository {
         } catch (CommandUserDatasourceException e) {
             throw new CommandRepositoryException(e.getMessage());
         } catch (Exception e) {
-            throw new CommandRepositoryException("Not expected exception: " + e.getMessage());
+            throw new CommandRepositoryException("Erro inesperado.");
         }
     }
 }

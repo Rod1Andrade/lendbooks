@@ -30,6 +30,8 @@ public class RegisterUserUsecase implements IRegisterUserUsecase {
             commandUserRepository.save(userInputData.parserToEntity(encodeFunction));
         } catch (CommandRepositoryException e) {
             throw new RegisterUserExcepion(e.getMessage());
+        } catch (Exception e) {
+            throw new RegisterUserExcepion("Erro desconhecido.");
         }
     }
 
