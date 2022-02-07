@@ -47,29 +47,23 @@ export class AuthComponent implements OnInit {
    */
   createUserFormGroup(): void {
     this.userForm = this.formBuilder.group({
-      firstName: new FormControl('Rodrigo', [
+      firstName: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(40),
       ]),
-      lastName: new FormControl('Andrade', [
+      lastName: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(40),
       ]),
-      email: new FormControl('rodrigopires.profissional@gmail.com', [
-        Validators.required,
-        Validators.email,
-      ]),
-      password: new FormControl('teste1234', [
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(70),
       ]),
-      confirmPassword: [
-        'teste1234',
-        RxwebValidators.compare({ fieldName: 'password' }),
-      ],
+      confirmPassword: ['', RxwebValidators.compare({ fieldName: 'password' })],
     });
   }
 
