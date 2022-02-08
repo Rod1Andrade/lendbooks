@@ -3,6 +3,10 @@
 Este é um monorepo que contem uma aplicação para controle de emprestimos de livros entre amigos.
 A aplicação está no Heroku, para acessar <a href="https://lb-f.herokuapp.com/auth/signUp" target="_blank">click aqui</a>.
 
+Lembrando, como se trata de um plano gratuito do HEROKU, quando acessar pela primeira vez pode ser que a aplicação esteja 
+no modo sleep, porém depois da primeira requisição, tanto no frontend quanto no backend, a plataforma do Heroku se encarrega
+de subir os dynos.
+
 Status: **em desenvolvimento**
 
 ## Tecnologias
