@@ -2,7 +2,7 @@
   "name": "leendbook-frontend",
   "version": "0.0.0",
   "engines": {
-    "node": "16.x"
+    "node": "16.13.2"
   },
   "scripts": {
     "ng": "ng",
