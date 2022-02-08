@@ -1,6 +1,7 @@
 # LendBooks
 
 Este é um monorepo que contem uma aplicação para controle de emprestimos de livros entre amigos.
+A aplicação está no Heroku, para acessar <a href="https://lb-f.herokuapp.com/auth/signUp" target="blank">click aqui</a>
 
 Status: **em desenvolvimento**
 
@@ -33,8 +34,8 @@ arquitetura e o domínio da aplicação.
 ## UserResgiter
 
 Pendências
-- [ ] Responsividade 
-- [ ] Interação com a API
+- [x] Responsividade 
+- [x] Interação com a API
 
 ![image](https://user-images.githubusercontent.com/51142291/152538091-809fd703-7e18-4ee4-a5d3-b77fd412fd35.png)
 
