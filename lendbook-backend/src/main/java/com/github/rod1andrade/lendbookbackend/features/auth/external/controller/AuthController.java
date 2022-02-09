@@ -2,9 +2,11 @@ package com.github.rod1andrade.lendbookbackend.features.auth.external.controller
 
 import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.IActiveRegisterdUserByTokenFactory;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.IRegisterUserUsecaseFactory;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.IValidateUserUsecaseFactory;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.ports.UserInputData;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IActiveRegisteredUserByTokenUsecase;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IRegisterUserUsecase;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IValidateUserUsecase;
 import com.github.rod1andrade.lendbookbackend.features.auth.external.event.OnSuccessRegistrationEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +30,7 @@ public class AuthController {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final IValidateUserUsecaseFactory validateUserUsecaseFactory;
     private final IRegisterUserUsecaseFactory registerUserUsecaseFactory;
     private final IActiveRegisterdUserByTokenFactory activeRegisterdUserByTokenFactory;
 
@@ -36,6 +39,10 @@ public class AuthController {
     @PostMapping(value = "/signUp")
     public ResponseEntity<Void> registerUser(@RequestBody UserInputData userInputData) {
         log.info("Sign up called");
+
+        IValidateUserUsecase validateUserUsecase = validateUserUsecaseFactory.create();
+        validateUserUsecase.apply(userInputData);
+
         IRegisterUserUsecase registerUserUsecase = registerUserUsecaseFactory.create();
         registerUserUsecase.apply(userInputData, passwordEncoder::encode);
 
@@ -59,7 +66,7 @@ public class AuthController {
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create(env.getProperty("app.web") + "/confirmAccountSuccess"));
 
-        return new ResponseEntity<Void>(headers, HttpStatus.MOVED_PERMANENTLY);
+        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
     }
 
 }

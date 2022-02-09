@@ -1,6 +1,7 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.handler;
 
 import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.ActiveRegisteredUserByTokenException;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.InvalidUserExcepetion;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.RegisterUserExcepion;
 import com.github.rod1andrade.lendbookbackend.features.auth.infra.exceptions.CommandStatusDatasourceException;
 import org.hibernate.exception.ConstraintViolationException;
@@ -88,10 +89,27 @@ public class AuthExceptionHandler {
                 ));
     }
 
-    // RegisterUserExcepion
     @ExceptionHandler(RegisterUserExcepion.class)
     public ResponseEntity<ResponseError> registerUserExcepion(
             RegisterUserExcepion e,
+            HttpServletRequest request
+    ) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        return ResponseEntity
+                .status(status)
+                .body(new ResponseError(
+                        "Bad Request.",
+                        Instant.now(),
+                        status,
+                        e.getMessage(),
+                        request.getRequestURI()
+                ));
+    }
+
+    @ExceptionHandler(InvalidUserExcepetion.class)
+    public ResponseEntity<ResponseError> invalidUserExcepetion(
+            InvalidUserExcepetion e,
             HttpServletRequest request
     ) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
