@@ -41,9 +41,9 @@ public class AuthController {
         log.info("Sign up called");
 
         IValidateUserUsecase validateUserUsecase = validateUserUsecaseFactory.create();
-        validateUserUsecase.apply(userInputData);
-
         IRegisterUserUsecase registerUserUsecase = registerUserUsecaseFactory.create();
+
+        validateUserUsecase.apply(userInputData);
         registerUserUsecase.apply(userInputData, passwordEncoder::encode);
 
         applicationEventPublisher.publishEvent(
