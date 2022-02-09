@@ -1,6 +1,5 @@
 package com.github.rod1andrade.lendbookbackend.features.mail.external.consumers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.rod1andrade.lendbookbackend.features.mail.core.entities.Mail;
 import com.github.rod1andrade.lendbookbackend.features.mail.core.factories.IDispatchMailUsecaseFactory;
 import com.github.rod1andrade.lendbookbackend.features.mail.core.usecases.interfaces.IDispatchMailUsecase;
