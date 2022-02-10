@@ -2,7 +2,7 @@ package com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.imple
 
 import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.CommandRepositoryException;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.DeleteUserException;
-import com.github.rod1andrade.lendbookbackend.features.auth.core.ports.UserInputData;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.ports.AbstractUserInputData;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.repositories.ICommandUserRepository;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IDeleteUserUsecase;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ public class DeleteUserUsecase implements IDeleteUserUsecase {
     private final ICommandUserRepository commandUserRepository;
 
     @Override
-    public void apply(UserInputData userInputData) throws DeleteUserException {
+    public void apply(AbstractUserInputData userInputData) throws DeleteUserException {
         try {
             commandUserRepository.delete(userInputData.parserToEntity(null));
         } catch (CommandRepositoryException e) {
