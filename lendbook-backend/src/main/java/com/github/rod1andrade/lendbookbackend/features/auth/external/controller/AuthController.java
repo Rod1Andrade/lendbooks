@@ -58,11 +58,9 @@ public class AuthController {
                     )
             );
         } catch (ImpossibleSendMailException e) {
-            e.printStackTrace();
             deleteUserUsecaseFactory.create().apply(userInputData);
             throw e;
         } catch (Exception e) {
-            e.printStackTrace();
             deleteUserUsecaseFactory.create().apply(userInputData);
         }
 
