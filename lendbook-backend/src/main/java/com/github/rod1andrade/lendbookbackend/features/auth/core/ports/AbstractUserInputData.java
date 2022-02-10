@@ -36,5 +36,11 @@ public abstract class AbstractUserInputData {
     @Setter
     protected String token;
 
+    /**
+     * Parse User Input Data to User Entity
+     *
+     * @param encodeFunction Function to hash password: Optional
+     * @return User Entity
+     */
     public abstract User parserToEntity(Function<String, String> encodeFunction);
 }

@@ -25,4 +25,15 @@ public class CommandUserRepository implements ICommandUserRepository {
             throw new CommandRepositoryException("Erro inesperado.");
         }
     }
+
+    @Override
+    public void delete(User user) throws CommandRepositoryException {
+        try {
+            commandUserDatasource.delete(user);
+        } catch (CommandUserDatasourceException e) {
+            throw new CommandRepositoryException(e.getMessage());
+        } catch (Exception e) {
+            throw new CommandRepositoryException("Erro inesperado.");
+        }
+    }
 }

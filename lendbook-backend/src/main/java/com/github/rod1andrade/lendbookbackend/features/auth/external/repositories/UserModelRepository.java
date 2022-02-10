@@ -5,4 +5,5 @@ import com.github.rod1andrade.lendbookbackend.features.auth.external.models.User
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserModelRepository extends JpaRepository<UserModel, UUID> {
+    UserModel findByEmail(String email);
 }
