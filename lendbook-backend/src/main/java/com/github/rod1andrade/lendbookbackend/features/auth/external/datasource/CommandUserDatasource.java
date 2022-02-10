@@ -8,14 +8,9 @@ import com.github.rod1andrade.lendbookbackend.features.auth.infra.datasource.ICo
 import com.github.rod1andrade.lendbookbackend.features.auth.infra.exceptions.CommandUserDatasourceException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.JDBCException;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Optional;
 
 @Component
@@ -27,9 +22,8 @@ public class CommandUserDatasource implements ICommandUserDatasource {
 
     @Override
     public void save(User user) throws CommandUserDatasourceException {
-
         try {
-            Optional<UserModel> userModelOptional = Optional.of(userModelRepository.save(
+            userModelRepository.save(
                     UserModel.builder()
                             .name(user.getFullName().getFirstName())
                             .lastName(user.getFullName().getLastName())
@@ -42,16 +36,18 @@ public class CommandUserDatasource implements ICommandUserDatasource {
                                             .token(user.getStatus().getToken())
                                             .build())
                             .build()
-            ));
-
-            log.info("User token? {}", user.getStatus().getToken());
-
-            userModelOptional.ifPresentOrElse(
-                    value -> log.info("User has been added: {}", value),
-                    () -> log.info("Something wrong!")
             );
         } catch (DataIntegrityViolationException e) {
             throw new CommandUserDatasourceException("Email ja cadastrado!");
+        }
+    }
+
+    @Override
+    public void delete(User user) throws CommandUserDatasourceException {
+        try {
+            userModelRepository.delete(userModelRepository.findByEmail(user.getEmail().getValue()));
+        } catch (Exception e) {
+            throw new CommandUserDatasourceException("Erro ao tentar deletar usuario");
         }
     }
 }

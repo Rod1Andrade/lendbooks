@@ -1,14 +1,14 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.controller;
 
-import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.IActiveRegisterdUserByTokenFactory;
-import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.IRegisterUserUsecaseFactory;
+ import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.ImpossibleSendMailException;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.*;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.ports.UserInputData;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IActiveRegisteredUserByTokenUsecase;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IDispatchConfirmMailUsecase;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IRegisterUserUsecase;
-import com.github.rod1andrade.lendbookbackend.features.auth.external.event.OnSuccessRegistrationEvent;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IValidateUserUsecase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,23 +28,41 @@ public class AuthController {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final IValidateUserUsecaseFactory validateUserUsecaseFactory;
     private final IRegisterUserUsecaseFactory registerUserUsecaseFactory;
+    private final IDispatchConfirmMailUsecaseFactory dispatchConfirmMailUsecaseFactory;
     private final IActiveRegisterdUserByTokenFactory activeRegisterdUserByTokenFactory;
+    private final IDeleteUserUsecaseFactory deleteUserUsecaseFactory;
 
-    private final ApplicationEventPublisher applicationEventPublisher;
+    private final IConfirmMailFactory confirmMailFactory;
 
     @PostMapping(value = "/signUp")
     public ResponseEntity<Void> registerUser(@RequestBody UserInputData userInputData) {
         log.info("Sign up called");
+
+        // Fabrica os casos de uso
+        IValidateUserUsecase validateUserUsecase = validateUserUsecaseFactory.create();
         IRegisterUserUsecase registerUserUsecase = registerUserUsecaseFactory.create();
+        IDispatchConfirmMailUsecase dispatchConfirmMailUsecase = dispatchConfirmMailUsecaseFactory.create();
+
+        // Usa os casos de uso
+        validateUserUsecase.apply(userInputData);
         registerUserUsecase.apply(userInputData, passwordEncoder::encode);
 
-        applicationEventPublisher.publishEvent(
-                new OnSuccessRegistrationEvent(
-                        registerUserUsecase.getOutputDate(),
-                        env.getProperty("app.host")
-                )
-        );
+        try {
+            dispatchConfirmMailUsecase.apply(
+                    confirmMailFactory.create(
+                            registerUserUsecase.getOutputDate().getEmail(),
+                            env.getProperty("app.host"),
+                            registerUserUsecase.getOutputDate().getToken()
+                    )
+            );
+        } catch (ImpossibleSendMailException e) {
+            deleteUserUsecaseFactory.create().apply(userInputData);
+            throw e;
+        } catch (Exception e) {
+            deleteUserUsecaseFactory.create().apply(userInputData);
+        }
 
         return ResponseEntity.ok().build();
     }
@@ -59,7 +77,7 @@ public class AuthController {
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create(env.getProperty("app.web") + "/confirmAccountSuccess"));
 
-        return new ResponseEntity<Void>(headers, HttpStatus.MOVED_PERMANENTLY);
+        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
     }
 
 }

@@ -8,4 +8,6 @@ import com.github.rod1andrade.lendbookbackend.features.auth.infra.exceptions.Com
  */
 public interface ICommandUserDatasource {
     void save(User user) throws CommandUserDatasourceException;
+
+    void delete(User user) throws CommandUserDatasourceException;
 }
