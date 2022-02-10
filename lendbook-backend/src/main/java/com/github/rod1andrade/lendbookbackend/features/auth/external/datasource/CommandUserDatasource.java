@@ -41,4 +41,13 @@ public class CommandUserDatasource implements ICommandUserDatasource {
             throw new CommandUserDatasourceException("Email ja cadastrado!");
         }
     }
+
+    @Override
+    public void delete(User user) throws CommandUserDatasourceException {
+        try {
+            userModelRepository.delete(userModelRepository.findByEmail(user.getEmail().getValue()));
+        } catch (Exception e) {
+            throw new CommandUserDatasourceException("Erro ao tentar deletar usuario");
+        }
+    }
 }

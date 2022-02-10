@@ -32,6 +32,7 @@ public class AuthController {
     private final IRegisterUserUsecaseFactory registerUserUsecaseFactory;
     private final IDispatchConfirmMailUsecaseFactory dispatchConfirmMailUsecaseFactory;
     private final IActiveRegisterdUserByTokenFactory activeRegisterdUserByTokenFactory;
+    private final IDeleteUserUsecaseFactory deleteUserUsecaseFactory;
 
     private final IConfirmMailFactory confirmMailFactory;
 
@@ -58,10 +59,11 @@ public class AuthController {
             );
         } catch (ImpossibleSendMailException e) {
             e.printStackTrace();
-            // Rotina para deletar usuario.
+            deleteUserUsecaseFactory.create().apply(userInputData);
             throw e;
         } catch (Exception e) {
             e.printStackTrace();
+            deleteUserUsecaseFactory.create().apply(userInputData);
         }
 
         return ResponseEntity.ok().build();

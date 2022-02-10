@@ -8,4 +8,6 @@ import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.Comm
  */
 public interface ICommandUserRepository {
     void save(User user) throws CommandRepositoryException;
+
+    void delete(User user) throws CommandRepositoryException;
 }
