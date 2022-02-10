@@ -22,9 +22,8 @@ public class CommandUserDatasource implements ICommandUserDatasource {
 
     @Override
     public void save(User user) throws CommandUserDatasourceException {
-
         try {
-            Optional<UserModel> userModelOptional = Optional.of(userModelRepository.save(
+            userModelRepository.save(
                     UserModel.builder()
                             .name(user.getFullName().getFirstName())
                             .lastName(user.getFullName().getLastName())
@@ -37,13 +36,6 @@ public class CommandUserDatasource implements ICommandUserDatasource {
                                             .token(user.getStatus().getToken())
                                             .build())
                             .build()
-            ));
-
-            log.info("User token? {}", user.getStatus().getToken());
-
-            userModelOptional.ifPresentOrElse(
-                    value -> log.info("User has been added: {}", value),
-                    () -> log.info("Something wrong!")
             );
         } catch (DataIntegrityViolationException e) {
             throw new CommandUserDatasourceException("Email ja cadastrado!");

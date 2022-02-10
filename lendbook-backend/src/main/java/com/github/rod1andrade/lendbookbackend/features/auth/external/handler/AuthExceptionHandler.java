@@ -1,6 +1,7 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.handler;
 
 import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.ActiveRegisteredUserByTokenException;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.ImpossibleSendMailException;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.InvalidUserExcepetion;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.RegisterUserExcepion;
 import com.github.rod1andrade.lendbookbackend.features.auth.infra.exceptions.CommandStatusDatasourceException;
@@ -118,6 +119,25 @@ public class AuthExceptionHandler {
                 .status(status)
                 .body(new ResponseError(
                         "Bad Request with user informations.",
+                        Instant.now(),
+                        status,
+                        e.getMessage(),
+                        request.getRequestURI()
+                ));
+    }
+
+    //ImpossibleSendMailException
+    @ExceptionHandler(ImpossibleSendMailException.class)
+    public ResponseEntity<ResponseError> impossibleSendMailException(
+            ImpossibleSendMailException e,
+            HttpServletRequest request
+    ) {
+        HttpStatus status = HttpStatus.SERVICE_UNAVAILABLE;
+
+        return ResponseEntity
+                .status(status)
+                .body(new ResponseError(
+                        "Email service unavaliable.",
                         Instant.now(),
                         status,
                         e.getMessage(),

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.entities.ConfirmAccountMail;
 import com.github.rod1andrade.lendbookbackend.features.auth.external.models.MailModel;
 import com.github.rod1andrade.lendbookbackend.features.auth.infra.events.IDispatchConfirmMailEvent;
+import com.github.rod1andrade.lendbookbackend.features.auth.infra.exceptions.DispatchConfirmMailEventException;
 import com.github.rod1andrade.lendbookbackend.queues.QueueSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,9 @@ public class DispatchConfirmMailEvent implements IDispatchConfirmMailEvent {
 
             queueSender.send(new ObjectMapper().readValue(mailAsString, Map.class), "sendmailqueue");
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            throw new DispatchConfirmMailEventException("Dados incorretos");
+        } catch (Exception e) {
+            throw new DispatchConfirmMailEventException("Erro desconhecido no evento de envio");
         }
     }
 }

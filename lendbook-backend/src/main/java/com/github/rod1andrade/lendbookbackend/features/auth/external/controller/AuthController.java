@@ -1,5 +1,6 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.controller;
 
+ import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.ImpossibleSendMailException;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.*;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.ports.UserInputData;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IActiveRegisteredUserByTokenUsecase;
@@ -46,14 +47,22 @@ public class AuthController {
         // Usa os casos de uso
         validateUserUsecase.apply(userInputData);
         registerUserUsecase.apply(userInputData, passwordEncoder::encode);
-        dispatchConfirmMailUsecase.apply(
-                confirmMailFactory.create(
-                        registerUserUsecase.getOutputDate().getEmail(),
-                        env.getProperty("app.host"),
-                        registerUserUsecase.getOutputDate().getToken()
-                )
-        );
 
+        try {
+            dispatchConfirmMailUsecase.apply(
+                    confirmMailFactory.create(
+                            registerUserUsecase.getOutputDate().getEmail(),
+                            env.getProperty("app.host"),
+                            registerUserUsecase.getOutputDate().getToken()
+                    )
+            );
+        } catch (ImpossibleSendMailException e) {
+            e.printStackTrace();
+            // Rotina para deletar usuario.
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return ResponseEntity.ok().build();
     }
