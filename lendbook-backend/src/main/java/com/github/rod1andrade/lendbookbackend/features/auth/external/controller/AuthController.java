@@ -1,19 +1,13 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.controller;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.IActiveRegisterdUserByTokenFactory;
-import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.IRegisterUserUsecaseFactory;
-import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.IValidateUserUsecaseFactory;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.factories.*;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.ports.UserInputData;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IActiveRegisteredUserByTokenUsecase;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IDispatchConfirmMailUsecase;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IRegisterUserUsecase;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interfaces.IValidateUserUsecase;
-import com.github.rod1andrade.lendbookbackend.features.auth.external.event.OnSuccessRegistrationEvent;
-import com.github.rod1andrade.lendbookbackend.queues.QueueSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/auth")
@@ -36,26 +29,31 @@ public class AuthController {
 
     private final IValidateUserUsecaseFactory validateUserUsecaseFactory;
     private final IRegisterUserUsecaseFactory registerUserUsecaseFactory;
+    private final IDispatchConfirmMailUsecaseFactory dispatchConfirmMailUsecaseFactory;
     private final IActiveRegisterdUserByTokenFactory activeRegisterdUserByTokenFactory;
 
-    private final ApplicationEventPublisher applicationEventPublisher;
+    private final IConfirmMailFactory confirmMailFactory;
 
     @PostMapping(value = "/signUp")
     public ResponseEntity<Void> registerUser(@RequestBody UserInputData userInputData) {
         log.info("Sign up called");
 
+        // Fabrica os casos de uso
         IValidateUserUsecase validateUserUsecase = validateUserUsecaseFactory.create();
         IRegisterUserUsecase registerUserUsecase = registerUserUsecaseFactory.create();
+        IDispatchConfirmMailUsecase dispatchConfirmMailUsecase = dispatchConfirmMailUsecaseFactory.create();
 
+        // Usa os casos de uso
         validateUserUsecase.apply(userInputData);
         registerUserUsecase.apply(userInputData, passwordEncoder::encode);
-
-        applicationEventPublisher.publishEvent(
-                new OnSuccessRegistrationEvent(
-                        registerUserUsecase.getOutputDate(),
-                        env.getProperty("app.host")
+        dispatchConfirmMailUsecase.apply(
+                confirmMailFactory.create(
+                        registerUserUsecase.getOutputDate().getEmail(),
+                        env.getProperty("app.host"),
+                        registerUserUsecase.getOutputDate().getToken()
                 )
         );
+
 
         return ResponseEntity.ok().build();
     }
