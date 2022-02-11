@@ -10,13 +10,15 @@ import org.mockito.Mockito;
 
 class RegisterUserUsecaseTest {
 
+    UserInputData userInputData = UserInputData.builder().password("testing-pass").build();
+
     ICommandUserRepository commandUserRepository = Mockito.mock(ICommandUserRepository.class);
     IRegisterUserUsecase userUsecase = new RegisterUserUsecase(commandUserRepository);
 
     @Test
-    public void shouldRegisterAUser() {
+    void shouldRegisterAUser() {
         userUsecase.apply(
-                UserInputData.builder().password("testing-pass").build(),
+                userInputData,
                 (pass) -> pass.toUpperCase() + "ENCODEDTEST"
         );
 
@@ -24,12 +26,12 @@ class RegisterUserUsecaseTest {
     }
 
     @Test
-    public void shouldThrowARegisterUserExcepionWhenItsNotPossibleRegisterAUser() {
+    void shouldThrowARegisterUserExcepionWhenItsNotPossibleRegisterAUser() {
         Mockito.doThrow(RegisterUserExcepion.class).when(commandUserRepository).save(Mockito.any());
         Assertions.assertThrows(
                 RegisterUserExcepion.class,
                 () -> userUsecase.apply(
-                        UserInputData.builder().password("testing-pass").build(),
+                        userInputData,
                         (pass) -> pass.toUpperCase() + "ENCODEDTEST"
                 )
         );

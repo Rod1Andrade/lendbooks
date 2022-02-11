@@ -80,7 +80,7 @@ public class AuthController {
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create(env.getProperty("app.web") + "/confirmAccountSuccess"));
 
-        return new ResponseEntity<Void>(headers, HttpStatus.MOVED_PERMANENTLY);
+        return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
     }
 
 }

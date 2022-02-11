@@ -53,9 +53,7 @@ public class CommandStatusDatasource implements ICommandStatusDatasource {
                         .build()
         ));
 
-        statusModelOptional.ifPresentOrElse(value -> {
-            log.info("Saved: {} with success", value);
-        }, () -> {
+        statusModelOptional.ifPresentOrElse(value -> log.info("Saved: {} with success", value), () -> {
             log.info("Something wrong");
             throw new PersistenceException("Is not possible validate this token.");
         });

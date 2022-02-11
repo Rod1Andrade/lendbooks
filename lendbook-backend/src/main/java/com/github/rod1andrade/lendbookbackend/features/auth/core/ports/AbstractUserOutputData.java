@@ -7,13 +7,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
+
 /**
  * @author Rodrigo Andrade
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public abstract class AbstractUserOutputData {
+public abstract class AbstractUserOutputData implements Serializable {
     @Getter
     @Setter
     private String name;

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 /**
  * @author Rodrigo Andrade
@@ -36,5 +36,5 @@ public abstract class AbstractUserInputData {
     @Setter
     protected String token;
 
-    public abstract User parserToEntity(Function<String, String> encodeFunction);
+    public abstract User parserToEntity(UnaryOperator<String> encodeFunction);
 }

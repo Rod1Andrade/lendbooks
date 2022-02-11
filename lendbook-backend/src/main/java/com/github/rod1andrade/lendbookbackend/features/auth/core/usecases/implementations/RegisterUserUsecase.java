@@ -10,7 +10,7 @@ import com.github.rod1andrade.lendbookbackend.features.auth.core.usecases.interf
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 /**
  * @author Rodrigo Andrade
@@ -24,7 +24,7 @@ public class RegisterUserUsecase implements IRegisterUserUsecase {
     private AbstractUserInputData userInputData;
 
     @Override
-    public void apply(AbstractUserInputData userInputData, Function<String, String> encodeFunction) {
+    public void apply(AbstractUserInputData userInputData, UnaryOperator<String> encodeFunction) {
         this.userInputData = userInputData;
         try {
             commandUserRepository.save(userInputData.parserToEntity(encodeFunction));

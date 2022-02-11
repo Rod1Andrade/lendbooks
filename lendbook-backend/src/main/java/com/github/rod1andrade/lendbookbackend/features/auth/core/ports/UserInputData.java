@@ -9,9 +9,8 @@ import com.github.rod1andrade.lendbookbackend.features.auth.core.valueobjects.Pa
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Random;
 import java.util.UUID;
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 /**
  * @author Rodrigo Andrade
@@ -20,7 +19,7 @@ import java.util.function.Function;
 @NoArgsConstructor
 public class UserInputData extends AbstractUserInputData {
     @Override
-    public User parserToEntity(Function<String, String> encodeFunction) {
+    public User parserToEntity(UnaryOperator<String> encodeFunction) {
         var fullName = new FullName(getName(), getLastName());
         var password = new Password(getPassword());
 

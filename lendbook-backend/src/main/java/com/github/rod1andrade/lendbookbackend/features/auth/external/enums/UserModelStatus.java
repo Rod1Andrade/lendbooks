@@ -17,6 +17,6 @@ public enum UserModelStatus {
     }
 
     public static UserModelStatus valueOf(int code) {
-        return Arrays.stream(values()).filter(v -> v.getCode() == code).findFirst().get();
+        return Arrays.stream(values()).filter(v -> v.getCode() == code).findFirst().orElseThrow();
     }
 }

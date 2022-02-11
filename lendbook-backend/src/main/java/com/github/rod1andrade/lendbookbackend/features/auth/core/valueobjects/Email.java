@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * @author Rodrigo Andrade
@@ -17,8 +17,8 @@ public class Email {
     @Setter
     private String value;
 
-    public boolean isValidEmail(Function<String, Boolean> validEmailFunction) {
-        return validEmailFunction.apply(getValue());
+    public boolean isValidEmail(Predicate<String> validEmailFunction) {
+        return validEmailFunction.test(getValue());
     }
 
     @Override
