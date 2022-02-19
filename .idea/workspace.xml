@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a68ecf4-65c9-462c-9d85-17247cd54b7e" name="Changes" comment="" />
+    <list default="true" id="4a68ecf4-65c9-462c-9d85-17247cd54b7e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lendbook-backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/lendbook-backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lendbook-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/lendbook-backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/core/enums/UserStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/core/enums/UserStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/core/ports/AbstractUserInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/core/ports/AbstractUserInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/core/ports/UserInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/core/ports/UserInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/core/valueobjects/Password.java" beforeDir="false" afterPath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/core/valueobjects/Password.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/external/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/external/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/external/models/UserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/external/models/UserModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/external/repositories/UserModelRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/features/auth/external/repositories/UserModelRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/lendbook-backend/src/main/java/com/github/rod1andrade/lendbookbackend/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lendbook-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/lendbook-backend/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +45,33 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lendbook-backend" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+  </component>
+  <component name="RunManager">
+    <configuration name="lendbooks" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/lendbook-backend" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -40,7 +82,22 @@
       <option name="presentableId" value="Default" />
       <updated>1643673180006</updated>
       <workItem from="1643673180664" duration="11000" />
+      <workItem from="1645279991766" duration="316000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

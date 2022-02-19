@@ -1,7 +1,5 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.core.enums;
 
-import com.github.rod1andrade.lendbookbackend.features.auth.external.enums.UserModelStatus;
-
 import java.util.Arrays;
 
 public enum UserStatus {
@@ -19,6 +17,6 @@ public enum UserStatus {
     }
 
     public static UserStatus valueOf(int code) {
-        return Arrays.stream(values()).filter(v -> v.getCode() == code).findFirst().get();
+        return Arrays.stream(values()).filter(v -> v.getCode() == code).findFirst().orElseThrow();
     }
 }
