@@ -1,9 +1,6 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.handler;
 
-import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.ActiveRegisteredUserByTokenException;
-import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.ImpossibleSendMailException;
-import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.InvalidUserExcepetion;
-import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.RegisterUserExcepion;
+import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.*;
 import com.github.rod1andrade.lendbookbackend.features.auth.infra.exceptions.CommandStatusDatasourceException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -138,6 +135,60 @@ public class AuthExceptionHandler {
                 .status(status)
                 .body(new ResponseError(
                         "Email service unavaliable.",
+                        Instant.now(),
+                        status,
+                        e.getMessage(),
+                        request.getRequestURI()
+                ));
+    }
+
+    @ExceptionHandler(UserNotActiveException.class)
+    public ResponseEntity<ResponseError> userNotActiveException(
+            UserNotActiveException e,
+            HttpServletRequest request
+    ) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
+
+        return ResponseEntity
+                .status(status)
+                .body(new ResponseError(
+                        "User account has troubles.",
+                        Instant.now(),
+                        status,
+                        e.getMessage(),
+                        request.getRequestURI()
+                ));
+    }
+
+    @ExceptionHandler(UserCredentialException.class)
+    public ResponseEntity<ResponseError> userCredentialException(
+            UserCredentialException e,
+            HttpServletRequest request
+    ) {
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
+
+        return ResponseEntity
+                .status(status)
+                .body(new ResponseError(
+                        "User credentials is not valid",
+                        Instant.now(),
+                        status,
+                        e.getMessage(),
+                        request.getRequestURI()
+                ));
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ResponseError> userNotFoundException(
+            UserNotFoundException e,
+            HttpServletRequest request
+    ) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+
+        return ResponseEntity
+                .status(status)
+                .body(new ResponseError(
+                        "User credentials is not valid",
                         Instant.now(),
                         status,
                         e.getMessage(),

@@ -1,11 +1,31 @@
 package com.github.rod1andrade.lendbookbackend.features.auth.external.models;
 
 
-import lombok.*;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import com.github.rod1andrade.lendbookbackend.features.auth.external.enums.Provider;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity(name = "tb_user")
 @AllArgsConstructor
@@ -15,7 +35,7 @@ import java.util.UUID;
 @ToString
 public class UserModel implements Serializable {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Setter
@@ -47,4 +67,11 @@ public class UserModel implements Serializable {
     @Getter
     @Setter
     private StatusModel statusModel;
+    
+    @Enumerated(EnumType.STRING)
+    @Getter
+    @Setter
+    @Builder.Default
+    private Provider provider = Provider.LOCAL;
+    
 }
