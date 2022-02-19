@@ -83,7 +83,7 @@ public class LendBooksJWT {
 		return verifier.verify(token);
 	}
 
-	public Claim decode(DecodedJWT decodedJWT, String claim) {
+	public Claim getClaim(DecodedJWT decodedJWT, String claim) {
 		return decodedJWT.getClaim(claim);
 	}
 }

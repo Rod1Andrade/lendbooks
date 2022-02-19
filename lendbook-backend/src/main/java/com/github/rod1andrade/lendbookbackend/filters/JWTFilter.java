@@ -5,7 +5,6 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.github.rod1andrade.lendbookbackend.features.auth.core.exceptions.UserNotFoundException;
 import com.github.rod1andrade.lendbookbackend.features.auth.external.security.LendBooksJWT;
 import com.github.rod1andrade.lendbookbackend.services.UserDetailServiceImpl;
-import com.nimbusds.jose.proc.SecurityContext;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,7 +46,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
             try {
                 DecodedJWT decodedJWT = lendBooksJWT.verify(plainToken);
-                String uuid = lendBooksJWT.decode(decodedJWT, "uuid").asString();
+                String uuid = lendBooksJWT.getClaim(decodedJWT, "uuid").asString();
                 log.info("Decoded: {}", uuid);
 
                 UserDetails userDetails = userDetailService.loadUserByUUID(uuid);
