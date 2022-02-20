@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
+
   lendbooksApiUrl: String = environment.lendbookApiUrl;
 
   constructor(private http: HttpClient) {}
@@ -20,5 +21,14 @@ export class AuthService {
    */
   registerUser(user: User): Observable<Object> {
     return this.http.post(`${this.lendbooksApiUrl}/auth/signUp`, user);
+  }
+
+  /**
+   * Call the authenticate user service
+   *
+   * @param user
+   */
+  authenticate(user: User): Observable<Object> {
+    return this.http.post(`${this.lendbooksApiUrl}/auth/signIn`, user);
   }
 }

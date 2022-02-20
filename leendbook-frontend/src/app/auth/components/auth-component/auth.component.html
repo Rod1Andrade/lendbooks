@@ -1,0 +1,37 @@
+<div id="auth-container">
+  <div id="header-title">
+    <h2>Lend<span>Books</span></h2>
+  </div>
+  <section id="auth-section">
+    <aside id="left-panel">
+      <section id="left-panel-content">
+        <div id="left-panel-content-title">
+          <h2>Lend<span>Books</span></h2>
+        </div>
+        <div id="left-panel-content-infotext">
+          <h2>Controle dos seus livros nas suas mãos.</h2>
+          <h3>
+            Com o LendBooks você define um novo jeito de emprestar livros.
+          </h3>
+        </div>
+        <div id="left-panel-content-footer">
+          <img src="assets/svg/footer-logo.svg" />
+        </div>
+      </section>
+    </aside>
+    <main role="main" id="main-panel">
+      <div id="main-panel-header">
+        <img
+          [src]="headerImagePath"
+          [width]="302"
+        />
+      </div>
+      <div id="main-panel-title">
+        <h1>{{ title }}</h1>
+      </div>
+      <div id="main-panel-body">
+        <ng-content></ng-content>
+      </div>
+    </main>
+  </section>
+</div>
