@@ -13,8 +13,11 @@ const routes: Routes = [
     path: 'confirmAccountSuccess',
     component: ConfirmAccountSuccess,
   },
-  // Todo: added a component here....
-  // { path: '', component: AppComponent, canActivate: [AuthGuard] },
+  {
+    path: '',
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({
