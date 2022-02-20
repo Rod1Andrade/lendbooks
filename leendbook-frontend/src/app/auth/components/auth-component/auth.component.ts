@@ -14,6 +14,5 @@ export class AuthComponent implements OnInit{
   headerImagePath = '';
 
   ngOnInit(): void {
-    console.log('Hello world');
   }
 }
