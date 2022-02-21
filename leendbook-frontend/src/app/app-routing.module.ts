@@ -1,18 +1,22 @@
-import { AuthSignInComponent } from './auth/sign-in/auth-sign-in.component';
+import { AppComponent } from './app.component';
+import { AuthGuard } from './guards/auth.guard';
 import { ConfirmAccountSuccess } from './auth/utils/confirm-account-success/confirm-account-success';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthSignUpComponent } from './auth/sign-up/auth-sign-up.component';
 
 const routes: Routes = [
-  { path: 'auth/signUp', component: AuthSignUpComponent },
   {
-    path: 'auth/signIn',
-    component: AuthSignInComponent,
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'confirmAccountSuccess',
     component: ConfirmAccountSuccess,
+  },
+  {
+    path: '',
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+    canActivate: [AuthGuard]
   },
 ];
 

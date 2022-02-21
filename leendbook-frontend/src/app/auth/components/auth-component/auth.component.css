@@ -1,0 +1,142 @@
+#header-title {
+  display: none;
+  width: 100%;
+  padding-top: 5.5em;
+  padding-left: 1.2em;
+  background-color: #46efa8;
+  color: white;
+}
+
+#header-title span {
+  color: black;
+}
+
+#auth-container {
+  flex: content;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+#auth-section {
+  width: 1280px;
+  height: auto;
+}
+
+#auth-section {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+}
+
+#left-panel {
+  background-color: #46efa8;
+  height: 100%;
+  box-shadow: 0px 0px 4px 0 rgb(0, 0, 0, 0.25);
+}
+
+#left-panel-content {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-content: center;
+  align-items: flex-start;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+#left-panel-content-title {
+  padding: 2.5em;
+  color: white;
+}
+
+#left-panel-content-title span {
+  color: black;
+}
+
+#left-panel-content-infotext {
+  padding: 4.5em;
+  color: white;
+}
+
+#left-panel-content-infotext h3 {
+  font-weight: normal;
+}
+
+#left-panel-content-footer {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+#left-panel-content-footer img {
+  margin-bottom: -6px;
+  padding: 0;
+}
+
+#main-panel {
+  height: 100%;
+  box-shadow: 0px 0px 4px 0 rgb(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#main-panel-header {
+  padding-top: 1.2em;
+}
+
+#main-panel-body mat-form-field {
+  width: 100%;
+}
+
+#main-panel-body form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+}
+
+/** 1200px **/
+@media screen and (max-width: 1200px) {
+  #auth-section {
+    width: 1000px;
+  }
+}
+
+/** 1000px **/
+@media screen and (max-width: 1000px) {
+  #header-title {
+    display: block;
+  }
+
+  #auth-section {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  #left-panel {
+    display: none;
+  }
+
+  #main-panel {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/** 473px **/
+@media screen and (max-width: 473px){
+  #main-panel {
+    height: auto;
+    min-width: 350px;
+  }
+
+  #main-panel-body form {
+    width: 100%;
+  }
+}

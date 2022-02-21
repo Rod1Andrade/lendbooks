@@ -1,2 +1,50 @@
-<h1>Em desenvolvimento...</h1>
-<p>Voltar para <a href="/auth/signUp">registro</a></p>
+<auth title="Bem vindo de volta" headerImagePath="assets/svg/undraw_welcoming_re_x0qo.svg">
+  <form [formGroup]="userLogin" (submit)="onSubmit()" ngForm="#signInForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="seuemail@email.com"
+        formControlName="email"
+      >
+      <mat-error *ngIf="true">Por favor entre com um email valido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Senha</mat-label>
+      <input
+        matInput
+        [type]="hideableFields.password ? 'password' : 'text'"
+        placeholder="********"
+        formControlName="password"
+      />
+      <mat-error *ngIf="true">Por favor entre com a sua senha corretamente.</mat-error>
+        <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        [attr.aria-label]="'Hide password'"
+        [attr.arial-pressed]="'hide'"
+        (click)="hideableFields.password = !hideableFields.password"
+      >
+        <mat-icon>{{
+          hideableFields.password ? "visibility_off" : "visibility_on"
+        }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="userLogin.invalid || isLoading"
+    >
+      {{ isLoading ? "" : "Entrar" }}
+      <mat-spinner
+        *ngIf="isLoading"
+        [diameter]="30"
+        color="accent"
+      ></mat-spinner>
+    </button>
+  </form>
+</auth>
