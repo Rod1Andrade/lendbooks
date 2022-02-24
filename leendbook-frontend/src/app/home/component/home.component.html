@@ -15,8 +15,53 @@
         </div>
       </div>
       <hr class="divider">
-      <nav id="aside-nav"></nav>
-      <div id="aside-footer"></div>
+      <nav id="aside-nav">
+        <ul>
+          <a href="">
+            <li class="selected">
+              <mat-icon aria-hidden="false" aria-label="My Library">domain</mat-icon>
+              <div>Minha biblioteca</div>
+            </li>
+          </a>
+          <a href="">
+            <li>
+              <mat-icon aria-hidden="false" aria-label="My lend books">import_contacts</mat-icon>
+              <div>Livros emprestados</div>
+            </li>
+          </a>
+          <a href="">
+            <li>
+              <mat-icon aria-hidden="false" aria-label="My frieds">person</mat-icon>
+              <div>Amigos</div>
+            </li>
+          </a>
+          <a href="">
+            <li>
+              <mat-icon aria-hidden="false" aria-label="settings">settings</mat-icon>
+              <div>Configurações</div>
+            </li>
+          </a>
+          <a href="">
+            <li>
+              <mat-icon aria-hidden="false" aria-label="Logout">power_settings_new</mat-icon>
+              <div>Sair</div>
+            </li>
+          </a>
+        </ul>
+      </nav>
+      <div id="aside-footer">
+        <div id="aside-footer-content">
+          <div id="side-footer-content-svg">
+            <img src="/assets/svg/undraw_people_re_dlle.svg" width="276" height="213">
+          </div>
+          <div id="side-footer-content-text">
+            <p>Se lendbooks transforma o seu jeito de controlar o seus livros, considere fazer uma doração.</p>
+          </div>
+        </div>
+        <div id="aside-footer-action">
+          <button mat-button (click)="null">Action</button>
+        </div>
+      </div>
     </aside>
     <main id="home-main-content">
       <h1>Hello 👋</h1>

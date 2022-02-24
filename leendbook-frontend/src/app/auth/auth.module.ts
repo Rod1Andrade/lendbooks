@@ -46,7 +46,6 @@ import { CommonModule } from '@angular/common';
     MatSnackBarModule,
     FormsModule,
     MatDialogModule,
-    MatButtonModule,
     AuthSignUpModule,
     AuthSignInModule,
     AuthRoutingModule,
