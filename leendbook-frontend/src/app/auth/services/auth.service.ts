@@ -4,13 +4,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
 
   lendbooksApiUrl: String = environment.lendbookApiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient
+    ) {}
 
   /**
    * Call the register user service.
@@ -39,6 +43,7 @@ export class AuthService {
   destroySession() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    this.router.navigateByUrl('');
   }
 
   isLogged(): boolean {
