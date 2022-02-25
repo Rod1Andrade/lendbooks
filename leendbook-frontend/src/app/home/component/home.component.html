@@ -20,46 +20,50 @@
           <a href="">
             <li class="selected">
               <mat-icon aria-hidden="false" aria-label="My Library">domain</mat-icon>
-              <div>Minha biblioteca</div>
+              <div class="aside-nav-text">Minha biblioteca</div>
             </li>
           </a>
           <a href="">
             <li>
               <mat-icon aria-hidden="false" aria-label="My lend books">import_contacts</mat-icon>
-              <div>Livros emprestados</div>
+              <div class="aside-nav-text">Livros emprestados</div>
             </li>
           </a>
           <a href="">
             <li>
               <mat-icon aria-hidden="false" aria-label="My frieds">person</mat-icon>
-              <div>Amigos</div>
+              <div class="aside-nav-text">Amigos</div>
             </li>
           </a>
           <a href="">
             <li>
               <mat-icon aria-hidden="false" aria-label="settings">settings</mat-icon>
-              <div>Configurações</div>
+              <div class="aside-nav-text">Configurações</div>
             </li>
           </a>
           <a href="">
             <li>
               <mat-icon aria-hidden="false" aria-label="Logout">power_settings_new</mat-icon>
-              <div>Sair</div>
+              <div class="aside-nav-text">Sair</div>
             </li>
           </a>
         </ul>
       </nav>
       <div id="aside-footer">
         <div id="aside-footer-content">
-          <div id="side-footer-content-svg">
+          <div id="aside-footer-content-svg">
             <img src="/assets/svg/undraw_people_re_dlle.svg" width="276" height="213">
           </div>
-          <div id="side-footer-content-text">
+          <div id="aside-footer-content-text">
             <p>Se lendbooks transforma o seu jeito de controlar o seus livros, considere fazer uma doração.</p>
           </div>
         </div>
         <div id="aside-footer-action">
-          <button mat-button (click)="null">Action</button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="null"
+          >Apoiar</button>
         </div>
       </div>
     </aside>
